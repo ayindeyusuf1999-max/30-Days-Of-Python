@@ -8,3 +8,4 @@
 *.air
 *.ipa
 *.apk
+.env
