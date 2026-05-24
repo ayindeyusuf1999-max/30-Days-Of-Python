@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf Ayinde | DevOps Engineer/Cloud Architect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid #1e1e2e;
+        }
+
+        nav h1 {
+            color: #00d4ff;
+            font-size: 1.2em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        nav ul a:hover {
+            color: #00d4ff;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f2e 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: #00d4ff;
+        }
+
+        .hero h2 {
+            font-size: 1.5em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #00d4ff;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #00b8d9;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+        }
+
+        .btn-outline:hover {
+            background: #00d4ff;
+            color: black;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 80px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2em;
+            color: #00d4ff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* SKILLS */
+        #skills {
+            background: #0d0d1a;
+            max-width: 100%;
+            padding: 80px 40px;
+        }
+
+        #skills h2 {
+            max-width: 1100px;
+            margin: 0 auto 40px;
+            text-align: center;
+            font-size: 2em;
+            color: #00d4ff;
+        }
+
+        .skills-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #2a2a3e;
+            transition: border-color 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: #00d4ff;
+        }
+
+        .skill-card h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .skill-card p {
+            color: #aaa;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        /* EXPERIENCE */
+        .exp-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .exp-card h3 {
+            color: white;
+            font-size: 1.1em;
+        }
+
+        .exp-card h4 {
+            color: #00d4ff;
+            margin: 5px 0;
+        }
+
+        .exp-card span {
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .exp-card ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 0.9em;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #2a2a3e;
+            transition: border-color 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #00d4ff;
+        }
+
+        .project-card h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: #aaa;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #0f3460;
+            color: #00d4ff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin: 2px;
+        }
+
+        .project-links {
+            margin-top: 15px;
+        }
+
+        .project-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 0.85em;
+        }
+
+        /* CERTIFICATIONS */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .cert-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #2a2a3e;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cert-icon {
+            font-size: 2em;
+        }
+
+        .cert-card h3 {
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .cert-card p {
+            color: #888;
+            font-size: 0.8em;
+        }
+
+        /* CONTACT */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            border-top: 1px solid #1e1e2e;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <h1>Yusuf Ayinde</h1>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div>
+            <h1>Hi, I'm <span>Yusuf Ayinde</span></h1>
+            <h2>DevOps / Site Reliability Engineer</h2>
+            <p>5 years of experience designing and operating cloud infrastructure across Azure, AWS, and GCP. Passionate
+                about automation, reliability, and GitOps.</p>
+            <a href="#projects" class="btn">View Projects</a>
+            <a href="resume.pdf" class="btn btn-outline" download>Download Resume</a>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="skills">
+        <h2>Core Competencies</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Cloud Platforms</h3>
+                <p>GCP • GKE • Azure • AWS</p>
+            </div>
+            <div class="skill-card">
+                <h3>IaC & Automation</h3>
+                <p>Terraform • Bicep • ARM Templates</p>
+            </div>
+            <div class="skill-card">
+                <h3>CI/CD</h3>
+                <p>GitLab CI/CD • GitHub Actions • ArgoCD • Spacelift • Bazel</p>
+            </div>
+            <div class="skill-card">
+                <h3>Containers</h3>
+                <p>Kubernetes • Docker</p>
+            </div>
+            <div class="skill-card">
+                <h3>Observability</h3>
+                <p>GCP Monitoring • Azure Monitor • Log Analytics</p>
+            </div>
+            <div class="skill-card">
+                <h3>Scripting</h3>
+                <p>Python • Bash • PowerShell • Azure CLI</p>
+            </div>
+            <div class="skill-card">
+                <h3>Networking</h3>
+                <p>VPC/VNet • VPN • DNS • Load Balancers</p>
+            </div>
+            <div class="skill-card">
+                <h3>Practices</h3>
+                <p>SRE • GitOps • Incident Response • Runbooks</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+
+        <div class="exp-card">
+            <h3>DevOps / Cloud Infrastructure Engineer</h3>
+            <h4>BBVA</h4>
+            <span>Internship Contract • 2024 – 2026</span>
+            <ul>
+                <li>Managed cloud infrastructure at scale using Terraform, PowerShell, and Azure CLI</li>
+                <li>Designed automated health checks reducing environment anomalies before customer impact</li>
+                <li>Built and maintained CI/CD pipelines accelerating release velocity for engineering teams</li>
+                <li>Championed GitOps practices using ArgoCD workflows and detailed runbooks</li>
+            </ul>
+        </div>
+
+        <div class="exp-card">
+            <h3>Cloud Infrastructure Analyst</h3>
+            <h4>Tahpin Inc.</h4>
+            <span>1 Year Contract • 2023 – 2024</span>
+            <ul>
+                <li>Automated infrastructure provisioning using Terraform modules</li>
+                <li>Supported CI/CD workflows enabling faster, consistent application releases</li>
+                <li>Conducted infrastructure audits to improve reliability and platform uptime</li>
+            </ul>
+        </div>
+
+        <div class="exp-card">
+            <h3>Junior Cloud Support Analyst</h3>
+            <h4>Rock Solid Safety</h4>
+            <span>1 Year Contract • 2021</span>
+            <ul>
+                <li>Supported end-to-end cloud migration with minimal disruption to business operations</li>
+                <li>Developed monitoring and alerting scripts for early warning of performance degradation</li>
+            </ul>
+        </div>
+
+        <div class="exp-card">
+            <h3>Internship</h3>
+            <h4>Venture for Canada</h4>
+            <span>2025</span>
+            <ul>
+                <li>Optimized developer workflows and improved internal tooling across distributed teams</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2>Notable Projects</h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <h3>GitOps Deployment with ArgoCD</h3>
+                <p>Designed and deployed a GitOps pipeline using ArgoCD on GKE with automated sync and rollback
+                    capabilities.</p>
+                <div><span class="tag">ArgoCD</span><span class="tag">GKE</span><span class="tag">GitOps</span></div>
+            </div>
+
+            <div class="project-card">
+                <h3>Multi-Cloud Terraform Modules</h3>
+                <p>Built reusable Terraform modules for AWS, Azure, and GCP for consistent infrastructure provisioning.
+                </p>
+                <div><span class="tag">Terraform</span><span class="tag">AWS</span><span class="tag">Azure</span><span
+                        class="tag">GCP</span></div>
+            </div>
+
+            <div class="project-card">
+                <h3>Bazel Build System Integration</h3>
+                <p>Integrated Bazel into a monorepo CI pipeline improving build reproducibility and reducing build
+                    times.</p>
+                <div><span class="tag">Bazel</span><span class="tag">CI/CD</span><span class="tag">Monorepo</span></div>
+            </div>
+
+            <div class="project-card">
+                <h3>GKE Cluster Deployment & Scaling</h3>
+                <p>Provisioned production-grade GKE clusters with autoscaling, node pool optimization, and workload
+                    identity.</p>
+                <div><span class="tag">Kubernetes</span><span class="tag">GKE</span><span class="tag">Autoscaling</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>AI Chatbot Web App</h3>
+                <p>Built and deployed an AI-powered chatbot using Python, Flask, and Claude API. Live on Render.</p>
+                <div><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Claude AI</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://ai-chatbot-vepi.onrender.com" target="_blank">Live Demo →</a>
+                    <a href="https://github.com/ayindeyusuf1999-max/30-Days-Of-Python" target="_blank">GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>ExpenseMate</h3>
+                <p>A beautiful web app to track monthly income and expenses. Built with Python and Flask, deployed live.
+                </p>
+                <div><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">HTML/CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://three0-days-of-python-1khz.onrender.com" target="_blank">Live Demo →</a>
+                    <a href="https://github.com/ayindeyusuf1999-max/30-Days-Of-Python" target="_blank">GitHub →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+        <h2>Certifications</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-icon">☁️</div>
+                <div>
+                    <h3>Azure Fundamentals (AZ-104)</h3>
+                    <p>Microsoft Certified</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">☁️</div>
+                <div>
+                    <h3>AWS Solutions Architect – Associate</h3>
+                    <p>Amazon Web Services</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">📘</div>
+                <div>
+                    <h3>Azure Cloud Services</h3>
+                    <p>Coursera</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🐧</div>
+                <div>
+                    <h3>Linux System Administration</h3>
+                    <p>IBM</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🎓</div>
+                <div>
+                    <h3>Red Hat Enterprise Linux Fundamentals</h3>
+                    <p>Red Hat</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🏆</div>
+                <div>
+                    <h3>OACP Certificate</h3>
+                    <p>Ontario</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <p style="color:#aaa; margin-bottom:20px;">Open to DevOps and SRE opportunities in Toronto and remote.</p>
+        <div class="contact-links">
+            <a href="mailto:ayindeyusef1999@gmail.com" class="btn">Email Me</a>
+            <a href="https://www.linkedin.com/in/yusuf-/" class="btn btn-outline" target="_blank">LinkedIn</a>
+            <a href="https://github.com/ayindeyusuf1999-max" class="btn btn-outline" target="_blank">GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Built by Yusuf Ayinde • DevOps Engineer • Toronto, ON</p>
+    </footer>
+
+</body>
+
+</html>
