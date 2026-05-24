@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseMate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f0f1a;
+            color: white;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .income p {
+            color: #00d4ff;
+        }
+
+        .expense p {
+            color: #ff6b6b;
+        }
+
+        .balance p {
+            color: #51cf66;
+        }
+
+        .forms {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-box {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .form-box h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: none;
+            background: #0f0f1a;
+            color: white;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background: #00d4ff;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00b8d9;
+        }
+
+        .expense-list {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .expense-list h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a3e;
+        }
+
+        .reset-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ExpenseMate</h1>
+        <p class="subtitle">Track your monthly expenses with ease</p>
+
+        {% set total_fixed = data.fixed | sum(attribute='amount') %}
+        {% set total_general = data.general | sum(attribute='amount') %}
+        {% set balance = data.income - total_fixed - total_general %}
+
+        <div class="cards">
+            <div class="card income">
+                <h3>Monthly Income</h3>
+                <p>${{ data.income }}</p>
+            </div>
+            <div class="card expense">
+                <h3>Total Expenses</h3>
+                <p>${{ total_fixed + total_general }}</p>
+            </div>
+            <div class="card balance">
+                <h3>Remaining Balance</h3>
+                <p>${{ balance }}</p>
+            </div>
+        </div>
+
+        <div class="forms">
+            <div class="form-box">
+                <h3>Add Income</h3>
+                <form method="POST" action="/add">
+                    <input type="hidden" name="category" value="income">
+                    <input type="number" name="amount" placeholder="Monthly income" required>
+                    <button type="submit">Set Income</button>
+                </form>
+            </div>
+            <div class="form-box">
+                <h3>Fixed Expense</h3>
+                <form method="POST" action="/add">
+                    <input type="hidden" name="category" value="fixed">
+                    <input type="text" name="name" placeholder="Expense name" required>
+                    <input type="number" name="amount" placeholder="Amount" required>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+            <div class="form-box">
+                <h3>General Expense</h3>
+                <form method="POST" action="/add">
+                    <input type="hidden" name="category" value="general">
+                    <input type="text" name="name" placeholder="Expense name" required>
+                    <input type="number" name="amount" placeholder="Amount" required>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="expense-list">
+            <h3>Fixed Expenses</h3>
+            {% for item in data.fixed %}
+            <div class="expense-item">
+                <span>{{ item.name }}</span>
+                <span>${{ item.amount }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="expense-list">
+            <h3>General Expenses</h3>
+            {% for item in data.general %}
+            <div class="expense-item">
+                <span>{{ item.name }}</span>
+                <span>${{ item.amount }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST" action="/reset">
+            <button class="reset-btn">Reset All Data</button>
+        </form>
+    </div>
+</body>
+
+</html>
